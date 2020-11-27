@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+  </head>
+<body>
+ 
+{% block content %}
+  	
+  <form method="POST" class="registration_form">
+    <h2 class="name-brand">Rhydo</h2>
+    <h3 class="title-page">Sign up page </h3>
+    {% csrf_token %}
+    
+  <div class="allField">
+    <div class="fieldWrapper">
+      {{ form.username.errors }}
+      <p class="label_form"><label for="{{ form.username.id_for_label }}">Username </label></p>
+      <div class="form_field">{{ form.username }}</div>
+  </div>
+  <div class="fieldWrapper">
+    {{ form.first_name.errors }}
+    <p class="label_form"><label for="{{ form.first_name.id_for_label }}">First name </label></p>
+    <div class="form_field">{{ form.first_name }}</div>
+  </div>
+  <div class="fieldWrapper">
+    {{ form.last_name.errors }}
+    <p class="label_form"><label for="{{ form.last_name.id_for_label }}">Last name </label></p>
+    <div class="form_field">{{ form.last_name }}</div>
+  </div>
+  <div class="fieldWrapper">
+    {{ form.email.errors }}
+    <p class="label_form"><label for="{{ form.email.id_for_label }}">Email </label></p>
+    <div class="form_field">{{ form.email }}</div>
+  </div>
+  <div class="fieldWrapper">
+    {{ form.password1.errors }}
+    <p class="label_form"><label for="{{ form.password1.id_for_label }}">password </label></p>
+    <div class="form_field">{{ form.password1 }}</div>
+</div>
+<div class="fieldWrapper">
+  {{ form.password2.errors }}
+  <p class="label_form"><label for="{{ form.password2.id_for_label }}">Confirm password </label></p>
+  <div class="form_field">{{ form.password2 }}</div>
+</div>
+
+
+</div>
+      
+  <input type="submit" value="Sign in" class="signin">
+  <div class="login-link-container">
+    <a href="{% url 'users:login' %}" class="login-link">Already an Account?</a>
+  </div>
+</form>
+
+<style>
+  .registration_form{
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    margin-left: 400px;
+    margin-top: 100px;
+  }
+  .label_form{
+    margin-bottom: 0px;
+  }
+  #id_username, #id_password1, #id_password2, #id_email, #id_first_name, #id_last_name{
+    width: 345px;
+  }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+	-webkit-box-shadow: 0 0 0 30px #D3D3D3 inset !important;
+	border-color: #D3D3D3;
+	outline: none !important;
+}
+
+ .title-page{
+    margin-left: 120px;
+}
+.name-brand{
+  margin-left: 140px;
+}
+
+.signin{
+  margin-top: 20px;
+  border: none;
+	width: 350px;
+	height: 50px;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+	transition: all 0.4s ease-in-out 0s;
+	box-sizing: border-box;
+	background-color: black;
+	font-family: 'Prompt', sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.200006px;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.login-link{
+	margin-left: 10px;
+	text-decoration: none;
+	color: black;
+}
+.login-link:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+.login-link-container{
+  margin-left: 100px;
+  margin-top: 10px;
+}
+</style>
+{% endblock %}
+
+ 
+</body>
+</html>

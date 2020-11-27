@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% extends '../base.html' %}
+
+<title></title>
+</head>
+
+{% block content %}
+<body>
+	<h4>Update {{product.name}} </h4>
+	<form method="POST"  enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="allField">
+				<div class="fieldWrapper">
+					{{ form.name.errors }}
+					<div class="form_field">
+						<label for="{{ form.name.id_for_label }}"> Product name:  </label>
+						{{ form.name }}
+					</div>
+			</div>
+			<div class="fieldWrapper">
+					{{ form.image.errors }}
+					
+					<div class="form_field">
+						<label for="{{ form.image.id_for_label }}">Product Image: 
+
+						</label>
+						{{ form.image }}
+					</div>
+			</div>
+			<div class="fieldWrapper">
+				{{ form.price.errors }}
+				<div class="form_field">
+					<label for="{{ form.price.id_for_label }}">Price: 
+
+					</label>
+					{{ form.price }}
+				</div>
+			</div>
+			<div class="fieldWrapper">
+				{{ form.description.errors }}
+				<p class="label_form"></p>
+				<div class="form_field">
+					<label for="{{ form.description.id_for_label }}">Description: 
+
+				</label>
+					{{ form.description }}
+				</div>
+			</div>
+    
+  	</div>
+		<input type="submit" value="Modify" class="modify update-product-btn">
+	</form>
+		
+
+</body>
+<style>
+	.fieldWrapper{
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+
+	.update-product-btn{
+		margin-top: 30px;
+		margin-left: 30px;
+		color: #ffffff;
+
+	}
+</style>
+
+
+</body>
+{% endblock %}
+</html>

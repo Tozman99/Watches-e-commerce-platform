@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% extends '../base.html' %}
+
+{% block content %}
+<body>
+	<form method="POST">
+
+		{% csrf_token %}
+		<p>Do you want to delete {{product.name}} ? </p>
+		<input type="submit" value="Delete" class="close">
+		<a href="{% url 'shops:detail-shop' shop.slug %}" class="content-link">Annuler</a>
+
+	</form>
+	<style>
+		.close{
+			margin-left: 10px;
+		}
+		p{
+			margin-left: 5px;
+		}
+	
+
+		.content-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+	text-decoration: none;
+    color: black;
+}
+
+
+.content-link:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+	</style>
+</body>
+{% endblock %}
+</html>

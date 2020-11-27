@@ -1,0 +1,10 @@
+
+{% extends '../base.html' %}
+
+{% block content%}
+	<img src="{{user.image.url}}">
+	<p>{{user.user.first_name}} - {{user.user.last_name}}</p>
+	<p> <label>Username:</label>{{user.user}}</p>
+	<p>{{user.user.email}}</p>
+	<p>{{user.auter_comment.post_set.all}}</p>
+{% endblock %}

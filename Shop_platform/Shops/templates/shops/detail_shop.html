@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% extends '../base.html' %}
+
+<title></title>
+</head>
+{% block content %}
+<body>
+	<div style="margin-left: 50px;margin-top: 20px;">
+		{% if profile == shop.owner %}
+			<p> Here is your Shop : {{shop.name}}</p>
+		{% else %}
+			Here, {{shop.name}} created by {{shop.owner}}
+			
+		{% endif %}
+		{% if profile == shop.owner %}
+		<p style="margin-left:50px;margin-bottom:60px;"><a class="le_btn" href="{% url 'shops:create-product' %}">Create a Product</a></p>
+
+		{% endif %}
+	</div>
+
+	<div class="row">
+		{% for product in products %}
+		
+			<div class="product-item">
+				<p class="product-info" style="text-align:center;">{{product.name}}</p>
+				<div class="image-container-product product">
+					<a href="{% url 'shops:detail-product' shop.slug product.slug %}"><img src="{{ product.image.url }}" class="imageproduct"></a>
+				</div>
+			</div>
+		
+		{% endfor %}
+		
+	</div>
+	<style>
+		.le_btn{
+			text-decoration: none;
+		}
+		.le_btn:hover{
+			text-decoration: none;
+		}
+	</style>
+</body>
+{% endblock %}
+</html>

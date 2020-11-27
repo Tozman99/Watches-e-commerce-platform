@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	{% extends "../base.html" %}
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<h3>Your Orders: </h3>	
+	{% for order in orders.values %}
+
+	{% for product in order.products %}
+	<div class="product-detail-infos">
+		<div class="product-detail-image-container">
+			<img class="product-image" src="{{product.image.url}}" alt="{{product.name}}">
+		</div>
+		<div>
+			<p class="product-name-detail">{{product.name}}</p>
+			<div>
+				<div class="product-description-detail">
+				{{product.description}}
+				</div>
+				<p class="price-product-detail">{{product.price}} euros </p>
+			
+			</div>
+			
+		</div>
+	</div>
+	{% endfor %}
+	<p class="total-order-price"> Total : {{order.price}} euros</p>
+
+	<hr></hr>
+
+	{% endfor %}
+	
+<style>
+	.total-order-price{
+		margin-left: 1040px;
+	}
+</style>
+</body>
+{% endblock %}
+</html>

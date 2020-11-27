@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	{% extends '../base.html' %}
+	{% block content %}
+<head>
+<title></title>
+
+
+</head>
+
+
+<body>
+	<h2>
+		Create your own shop
+	</h2>
+	
+	<form method="POST" class="form-creation">
+		{% csrf_token %}
+		<div class="fieldWrapper">
+			{{ form.name.errors }}
+			
+			<p class="label_form"><label for="{{ form.name.id_for_label }}">Shop Name: </label></p>
+			<div class="form_field">{{ form.name }}</div>
+			<input type="submit" name="create your shop" value="create your shop" class="le_btn">
+	</form>
+
+</body>
+<style>
+	form{
+		margin-top: 100px;
+		text-align: center;
+		
+	}
+	.form_field{
+		display: inline-block;
+		margin-top:0px;
+		margin-right: 10px;
+	}
+	p{
+		display: inline-block;
+	}
+	input{
+		margin-top: 16px;
+	}
+
+	.fieldWrapper{
+		margin-right: 100px;
+	}
+
+	h2{
+		margin-left: 50px;
+	}
+
+</style>
+{% endblock %}
+</html>

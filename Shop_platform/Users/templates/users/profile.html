@@ -1,0 +1,78 @@
+{% extends '../base.html' %}
+
+{% block content%}
+	
+	<img src="{{person.image.url}}" class="profile-image">
+	<div class="informations-user">
+		<p>
+			<label>Username:</label>
+
+			{{person.user}}
+		</p>
+		<p>
+			{{person.user.email}}
+		</p>
+	</div>
+	<form method="POST" enctype="multipart/form-data">
+	
+		{% csrf_token %}
+		<div class="fieldWrapper">
+			{{ form.image.errors }}
+			
+			<div class="form_field">
+				<label for="{{ form.image.id_for_label }}">Change Your photo: 
+
+				</label>
+				{{ form.image }}
+			</div>
+			</div>
+			<input class="le_btn change-profile-photo" value="Change your Profile Photo" type="submit">
+	</form>
+	<div class="div_contain change-password-profile">
+		<a href="{% url 'users:Change_password' %}" class="change-password content-link">Change your password</a>
+
+	</div>
+
+
+	<style>
+		.profile-image{
+			height: 50px;
+			width: 50px;
+			margin-left: 50px;
+			margin-top: 40px;
+		}
+		.informations-user{
+			margin-left: 100px;
+		}
+		.change-password-profile{
+			margin-left: 280px;
+			margin-top: 20px;
+		}
+		.change-profile-photo{
+			margin-top: 20px;
+			margin-left: 100px;
+		}
+		.fieldWrapper{
+			margin-left: 100px;
+		}
+
+
+
+		.content-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+	text-decoration: none;
+    color: black;
+}
+
+
+.content-link:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+
+	</style>
+
+
+{% endblock %}
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% extends '../base.html' %}
+
+{% block content %}
+<body>
+
+	<div class="product-detail-infos">
+		<div class="product-detail-image-container">
+			<img class="product-image" src="{{product.image.url}}" alt="{{product.name}}">
+		</div>
+		<div>
+			<p class="product-name-detail">{{product.name}}</p>
+			<div>
+				<div class="product-description-detail">
+				{{product.description}}
+				</div>
+				<p class="price-product-detail">{{product.price}} euros </p>
+				<!--
+				<div>
+					<small class="small-owner">sold by {{product.shop.owner}}</small>
+				</div>
+			-->
+			</div>
+			
+			
+			{% if product.seller.user == request.user %}
+
+			<a href="{% url 'shops:update-product' product.shop.slug product.slug %}" class="modify">modify</a>
+			<a href="{% url 'shops:delete-product' product.shop.slug product.slug %}" class="close">Remove</a>
+
+			{% else %}
+			<form method="POST">
+				{% csrf_token %}
+			<button type="submit" class="le_btn">Add to Cart</button>
+			</form>
+			{% endif %}
+			<div class="return-shop">
+			<a href="{% url 'shops:detail-shop' product.shop.slug %}" class="link-to-shop">Go to {{product.shop.name}}</a>
+			</div>
+		</div>
+	</div>
+	<style>
+		.modify{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+
+		}
+		.modify:hover{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+		}
+		.modify:visited{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+		}
+		.close{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+			color: black;
+
+		}
+		.close:hover{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+			color: black;
+
+		}
+		.close:visited{
+			text-decoration: none;
+			font-family: "Prompt", sans-serif;
+			font-family: 14px;
+			color: black;
+
+		}
+		.link-to-shop{
+			text-decoration: none;
+			background-color: #32CD33;
+			color: white;
+			border-radius:2%;
+			padding-right: 3px;
+			padding-left: 3px;
+
+		}
+		.link-to-shop:hover{
+			text-decoration: none;
+			background-color: #32CD33;
+			color: black;
+			border-radius:2%;
+			padding-right: 3px;
+			padding-left: 3px;
+			
+
+		}
+		.link-to-shop:visited{
+			text-decoration: none;
+			background-color: #32CD33;
+			color: white;
+			border-radius:2%;
+			padding-right: 3px;
+			padding-left: 3px;
+		}
+
+
+	</style>
+</body>
+{% endblock %}
+</html>

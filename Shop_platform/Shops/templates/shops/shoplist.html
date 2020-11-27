@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% extends '../base.html' %}
+	{% load static %}
+
+<title></title>
+<link rel="stylesheet" href="{% static 'Shops/css/shopcart.css' %}">
+</head>
+
+{% block content %}
+<body class="shopping-cart-body">
+
+	<p>Your Shopping Cart</p>
+
+	<form method="POST">
+		{% csrf_token %}
+	{% if products|length != 0 %}	
+		<div class="products-infos" value="{{products|length}}" id="products-length">
+		{% for product in products %}
+			<form method="POST">
+				{% csrf_token %}
+			<div class="information-product">
+				<img class="product-image" src="{{ product.image.url }}">
+
+				<div class="product-image-container">
+				
+					<div id="name-{{forloop.counter0}}" value="ID-{{product.pk}}">
+						<span>{{product.name}}</span>
+						<p class="product-description">{{ product.description }}</p>
+
+					</div>
+					
+				</div>
+			<div class="product-changement">
+				
+				<div class="product-quantity-update">
+				<span>Quantity:
+				<ion-icon id="up-{{ forloop.counter0 }}" name="caret-up-outline"></ion-icon>
+				<span id="quantity-{{ forloop.counter0 }}" value="{{product.price}} euros" class="single-product-quantity"> {{product.quantity}} </span>
+				<ion-icon id="down-{{ forloop.counter0 }}" name="caret-down-outline"></ion-icon>
+				</div>
+			
+				</span>
+			<div class="product-delete-and-price">
+				<button class="close" aria-label="Close" value="{{product.pk}}" type="submit"  name="Delete" value="{{product.pk}}">Delete</button>
+				<span id="price-{{ forloop.counter0 }}">{{product.price}} euros </span>
+			</div>
+			</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="resume-order">
+		<p>Total: <span id="TotalCost" value="{{total_cost}}">{{total_cost}}</span> euros </p>
+
+		{% if profile.user != request.user %}
+		<input type="hidden" value="order" name="panier" id="panier">
+		<input type="submit" value="Create an Order" class="le_btn" onclick="changeValue()">
+		</form>
+
+		{% else %}
+		<a href="{% url 'users:login' %}"><input type="submit" value="Login" class="le_btn"></a>
+		{% endif %}
+
+	</div>
+		</form>
+	{% else %}
+	<p class="panier-empty"> votre panier est vide </p>
+
+	{% endif %}
+
+
+<script>
+
+	// take as argument an event 
+
+
+	let productsLength = "{{products|length}}"
+	productsLength = parseInt(productsLength);
+	let totalBill = parseFloat(document.getElementById("TotalCost").getAttribute("value"))
+	function changeHtmlQuantity(id, content){
+
+		document.getElementById("quantity-"+id).innerHTML = content.toString()
+	};
+
+	function changeHtmlPrice(id, content){
+
+		document.getElementById("price-"+id).innerHTML = content.toString() + " euros"
+	};
+
+	const productQuantity = {};
+
+	for (let i = 0; i < productsLength; i++){
+		let productName = document.getElementById("name-"+i).getAttribute("value");
+		productQuantity[productName] = "1";
+
+	};
+
+	for (let i = 0; i < productsLength; i++){
+
+		let btnUp = document.getElementById("up-"+i)
+		let btnDown = document.getElementById("down-"+i)
+		let quantity = document.getElementById("quantity-"+i).innerHTML;
+		quantityHtml = quantity
+		quantity = parseInt(quantity);
+		let productName = document.getElementById("name-"+i).getAttribute("value");
+		
+		if (quantity >= 1){
+					
+					btnUp.addEventListener("click", function(){
+						quantity++
+						//debugger;
+					changeHtmlQuantity(i, quantity)
+
+					priceValue = document.getElementById("quantity-"+i).getAttribute("value")
+					price = priceCalculation(priceValue, quantity)
+					changeHtmlPrice(i, price)
+					productQuantity[productName] = quantity.toString()
+					console.log(totalBill, "+", uniquePriceCalculation(i))
+					totalBill += uniquePriceCalculation(i);
+					console.log("egale = ", totalBill);
+					changeTotalBillHtml(totalBill)
+
+					});
+					btnDown.addEventListener("click", function(){
+						if (quantity > 1){
+						quantity--
+						//debugger;
+						changeHtmlQuantity(i, quantity)
+						priceValue = document.getElementById("quantity-"+i).getAttribute("value")
+						price = priceCalculation(priceValue, quantity)
+						changeHtmlPrice(i, price)
+						productQuantity[productName] = quantity.toString()
+
+					console.log(totalBill, "+", uniquePriceCalculation(i))
+					totalBill -= uniquePriceCalculation(i);
+					console.log('egale = ', totalBill);
+					changeTotalBillHtml(totalBill);
+
+					}
+					});
+
+			}
+
+	function changeValue(){
+
+		document.getElementById("panier").value = convertJSONObject(productQuantity)
+		console.log(convertJSONObject(productQuantity))
+	}
+	convertJSONObject(productQuantity)
+
+	};
+	console.log("initial: ", totalBill, "euros")
+
+
+	let totalCost = document.getElementById("TotalCost");
+
+	function uniquePriceCalculation(id){
+
+		let priceValue = parseFloat(document.getElementById("quantity-"+id).getAttribute("value"));
+
+		return priceValue
+
+	}
+
+	function changeTotalBillHtml(total){
+
+		document.getElementById("TotalCost").innerHTML = total;
+	};
+
+
+	function priceCalculation(price, quantity){
+
+		let priceUnique = parseFloat(price)
+		let priceChanged = priceUnique * quantity
+		priceChanged.toFixed(2)
+		priceChanged = priceChanged.toString()
+		
+		return priceChanged
+
+	};
+
+	function convertJSONObject(obj){
+		
+		obj = JSON.stringify(obj)
+		
+		return obj
+	};
+
+
+	
+</script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<style>
+	.panier-empty{
+		text-align: center;
+		margin-top: 20px;
+	}
+</style>
+</body>
+{% endblock %}
+</html>

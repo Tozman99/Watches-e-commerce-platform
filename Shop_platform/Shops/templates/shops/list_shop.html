@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+
+<!DOCTYPE html>
+<html>
+{% extends '../base.html' %}
+{% block content %}
+<head>
+</head>
+<body>
+	<div class="shops-list">
+	{% for shop in shops %}
+	<a class="shop-link" href="{% url 'shops:detail-shop' shop.slug %}" >
+		<div class="unique-shop">
+			<div><img src="{{shop.owner.image.url}}" class="image-owner-shop" > {{shop.owner.user}}</div>
+			<div class="shop-name-link">
+				<p>{{shop.name}}</p>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
+	</div>
+	<style>
+		.shop-link{
+		   text-decoration: none;
+		   color: black;
+	   }
+	   .shop-link:hover{
+		   text-decoration: none;
+		   color: black;
+   
+	   }
+	   .shop-link:visited{
+		   text-decoration: none;
+		   color: black;
+   
+	   }
+	   .unique-shop:hover{
+		   background-color: #D3D3D3;
+		   cursor: pointer;
+	   }
+	   .shops-list{
+			margin-top: 50px;
+	   }
+   </style>
+</body>
+{% endblock %}
+</html>

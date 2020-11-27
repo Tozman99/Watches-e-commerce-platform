@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+{% block content %}
+
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+	<div class="page-content">
+		<div class="block-one"></div>
+		<div class="login-wrap block-two">
+			<h3>RHYDO</h3>
+			<h2>Login Here</h2>
+
+			<div class="login-html">
+				<div class="login-form">
+					<div class="sign-in-htm">
+						<form method="POST">
+							{% csrf_token %}
+							<div class="fieldWrapper group">
+								{{ form.username.errors }}
+								<div class="form_field">
+									<div><small><label for="{{ form.name.id_for_label }}" class="label"> Username </label></small></div>
+									{{ form.username }}
+								</div>
+							</div>
+							<div class="fieldWrapper">
+								{{ form.password.errors }}
+								<div class="form_field">
+									<div>
+										<small><label for="{{ form.name.id_for_label }}" class="label"> Password  </label></small>
+									</div>
+									{{ form.password }}
+								</div>
+							</div>
+							
+							<div class="group">
+								<input type="submit" class="button" value="SIGN IN">
+							</div>
+							<div class="hr"></div>
+							<div class="foot-lnk">
+								<span>
+									<a class="forgot-password" href="{% url 'password-reset' %}">Forgot your Password?</a>
+									<a class="signup-link" href="{% url 'users:registration' %}">Sign up for Rhydo</a>
+								</span>
+
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="block-three"></div>
+	</div>
+<style>
+	.page-content{
+		display:grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		font-family: "Prompt", sans-serif;
+		font-size: 14px;
+
+	}
+
+	.login-wrap{
+		text-align: center;
+		margin-top: 50px;
+	}
+
+	#id_username, #id_password{
+		border-width:0px;
+		border:none;
+		background-color: black;
+		border-bottom: 2px solid #696969;
+		width: 350px;
+		margin-left: -50px;
+
+	}
+	input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+	-webkit-box-shadow: 0 0 0 30px #D3D3D3 inset !important;
+	border-color: #D3D3D3;
+	outline: none !important;
+
+
+
+}
+.form_field{
+	background-color: #D3D3D3;
+	padding-left: 50px;
+	text-align: left;
+	margin-bottom: 20px;
+	width: 300px;
+	margin-left: 25px;
+}
+
+.group{
+	margin-top: 20px;
+}
+
+.label{
+	margin-left: -50px;
+}
+
+h3{
+	text-align:center;
+}
+
+.button{
+	border: none;
+	width: 350px;
+	height: 50px;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+	transition: all 0.4s ease-in-out 0s;
+	box-sizing: border-box;
+	background-color: black;
+	font-family: 'Prompt', sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.200006px;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	border-radius: 5px;
+
+}
+
+.forgot-password{
+	margin-left: -50px;
+	text-decoration: none;
+	color: black;
+}
+
+.signup-link{
+	margin-left: 10px;
+	margin-right: -30px;
+	text-decoration: none;
+	color: black;
+}
+.signup-link:hover{
+
+	color: black;
+}
+.forgot-password:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+.signup-link:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+
+</style>
+</body>
+</html>
+{% endblock %}

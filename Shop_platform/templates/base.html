@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Rhydo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/Users/home.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body class="body">
+        <header class="header-container">
+    
+            
+            <div class="container">
+                <a class="title-link" href="{% url 'users:home' %}">
+                        <img src="{% static 'images/logo.png' %}">
+                </a>
+                 <nav>
+                     <ul class="menu">
+                        <li class="list-element"><a href="{% url 'shops:products-list' %}"> New Trends</a></li>
+                        <li class="list-element"><a href="{% url 'users:story' %}">Our story </a></li>
+                        <li class="list-element"> <a href="{% url 'users:tutorials' %}">Tutorials</a></li>
+                        <li class="list-element"> <a href="{% url 'shops:shop-list' %}">Best stores</a> </li>
+                        <li class="list-element"> <a href="{% url 'users:services' %}">Services</a> </li>
+    
+    
+                     </ul>
+                     <ul class="user-list">
+    
+                        <li class="user-list-element"><a href="{% url 'shops:shopping-cart' %}"><img src="{% static 'images/shopcart.png' %}"></a></li>
+                        <li class="user-list-element"><a href="{% url 'notifications:notif_list' %}"><img src="{% static 'images/notificationbell.png' %}"></a></li>
+                        {% if user.is_authenticated %}
+                        <li class="user-list-element">
+                            <div class="dropdown">
+                                <button class="dropbtn"><img src="{{ profile.image.url }}" class="profile-image-minia"></button>
+                                <div class="dropdown-content">
+                                    <a href="{% url 'users:profile' %}">Profile</a>
+                                    {% if shop %}
+                                    <a href="{% url 'shops:detail-shop' shop.slug %}">Your Shop</a>
+                                    {% endif%}
+                                    <a href="{% url 'orders:order_list' %}">Your orders</a>
+                                    <a href="{% url 'users:logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        {% else %}
+                        
+                        <li class="user-list-element"><a href="{% url 'users:login' %}"><img src="{% static 'images/profile.png' %}"></a></li>
+
+                        {% endif %}
+    
+                     </ul>
+    
+                </nav>
+            </div>
+        </header>
+
+       
+
+{% block content %}
+
+{% endblock %}
+
+
+<footer class="footer">
+    <ul class="element-footer-list-base">
+        <li><div>
+            <p>Pages</p>
+            <a href="{% url 'users:story' %}" class="a-link">Our story</a>
+            <a href="{% url 'shops:products-list' %}" class="a-link">New trends</a>
+            <a href="{% url 'api:shop-list' %}" class="a-link">Api</a>
+        </div></li>
+        
+        <li><div>
+           <p>Services</p>
+           <div>Certifiate sellers</div>
+           <div>Guarenteed purchases</div>
+           <div>FAQ</div>
+
+        </div></li>
+        <li><div>
+            <p>Tutorials </p>
+            <a>Create your shop</a>
+            <a>Create your products</a>
+            <a>Tips</a>
+        </div></li>
+        <li><div>
+            <p>Physical stores</p>
+            <div>
+            <a>L’avenue des Champs-Élysées 19</a>
+            </div>
+            <div>
+            <a>Rue Gaucheret, 1030 Schaerbeek</a>
+            </div>
+           
+        </div></li>
+        
+        <li><div id="contact-footer">
+            <p>contact </p>
+            <div>karim.sadiki@gmail.com</div>
+        </div></li>
+    
+    </ul>
+</footer>
+<style>
+     .list-element > a{
+        text-decoration: none;
+        color: black;
+    }
+    .list-element > a:hover{
+        text-decoration: none;
+        color: black;
+
+    }
+    .list-element > a:visited{
+        text-decoration: none;
+        color: black;
+
+    }
+
+.list-element::after{
+    content: "";
+    display: block;
+    position: relative;
+    left: -4px;
+    width: 0px;
+    top: 11px;
+    border-bottom: 2px solid #D3D3D3; 
+    transition: all ease-in-out .2s; }
+
+.list-element:hover::after {
+    width: 60%;
+    left: -4px;
+    top: 11px;
+    margin-top: 0px;
+}
+
+.profile-image-minia{
+    width: 20px;
+    height: 20px;
+}
+
+.a-link{
+    text-decoration: None;
+    color: white;
+
+}
+.a-link:visited{
+    text-decoration: none;
+    color: white;
+
+}
+.dropbtn {
+  font-size: 14px;
+  border: none;
+  padding: 0px;
+  background-color: #ffffff;
+  
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 100px;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  background-color: #ffffff;
+
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+</style>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% extends "../base.html" %}
+{% block content %}
+<body>
+	
+	<div class="notifications-list">
+		<div class="notifications-list-title"><h3>Notifications</h3></div>
+		{% if notifications %}
+		{% for notification in notifications %}
+
+			
+			
+			{% if notification.type == "order" %}
+			<a class="notification-link" href="{% url 'orders:order_list' %}">
+			<div class="unique-notification buy">
+				<div><small>{{ notification.message }}</small></div>
+				
+			</div>
+			</a>
+
+			{% elif notification.type == "sell" %}
+				
+				<div>
+					<div class="unique-notification">
+					<small>{{ notification.message }}</small>
+					</div>
+				</div>
+
+			
+			{% endif %}
+
+
+		{% endfor %}
+
+		{% else %}
+			<div><small>You have no notification yet !!!</small></div>
+
+		{% endif %}
+
+	</div>
+</body>
+<style>
+
+.notification-link{
+    text-decoration: none;
+    font-family: 'Prompt', sans-serif;
+    font-family: 14px;
+}
+
+.notification-link:hover{
+    text-decoration: none;
+    background-color: #D3D3D3;
+    font-family: 'Prompt', sans-serif;
+    font-family: 14px;
+}
+.notification-link:visited{
+    text-decoration: none;
+    font-family: 'Prompt', sans-serif;
+	font-family: 14px;
+	color: black;
+}
+.buy:hover{
+	background-color: #D3D3D3;
+}
+</style>
+{% endblock %}
+
+
+</html>
+
+

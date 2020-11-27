@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    {% extends "../base.html" %}
+    {% block content %}
+<head>
+
+</head>
+<body>
+    <h3>Tutorials </h3>
+    <ul>
+        <li> You have to login in order to follow the tutorial. You can go there <bold><a class="content-link" href="{% url 'users:login' %}">Login</a></bold> if you haven't an account <a class="content-link" href="{% url 'users:registration' %}">Registration</a></li>
+        <li>If you want to order something, Select an item , Create an order and you're done </li>
+        {% if profile != None %}
+        <li>Do you want to be a seller ? You can create a shop Here:<bold> <a class="content-link" href="{% url 'shops:creation-shop' %}">Create your shop</a></bold></li>
+        <li>Once it's done you can create a product</li>
+        {% endif %}
+    </ul>
+
+    <h3>Tips </h3>
+    <ul>
+        <li>it's always a good idea to fix a decent price for your product </li>
+        <li>Having a high quality photo helps you to sell (<smal>Best resolution : 1080X1080</smal>)</li>
+        <li>A detailed description helps your clients to have more information </li>
+        
+    </ul>
+</body>
+<style>
+
+    ul{
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+    h3{
+        margin-top: 40px;
+        margin-left: 20px;
+    }
+ 
+    .content-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+	text-decoration: none;
+    color: black;
+}
+
+
+.content-link:hover{
+	color: black;
+	border-bottom: black 0.125em solid;
+}
+
+
+
+</style>
+{% endblock %}
+</html>

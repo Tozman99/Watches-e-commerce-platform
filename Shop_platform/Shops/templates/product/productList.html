@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    {% extends "../base.html" %}
+    <head>
+    </head>
+{% block content %}
+    <body>
+
+        <div class="row final-products-list">
+            {% for product in products %}
+            <div class="product-item">
+                <p class="product-info">{{ product.name }}</p>
+                <div class="image-container-product product">
+                    <a href="{% url 'shops:detail-product' product.shop.slug product.slug %}"><img src="{{ product.image.url }}" class="imageproduct"></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </body>
+
+    <style>
+        .product-item{
+            text-align: center;
+        }
+        .image-container-product{
+            overflow: hidden;
+        }
+        .final-products-list{
+            margin-top: 50px;
+        }
+    </style>
+{% endblock %}
+</html>
