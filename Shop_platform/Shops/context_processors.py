@@ -28,9 +28,13 @@ def get_shop(request):
 
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        shop = get_object_or_404(Shop, owner=profile)
 
-        return {"shop": shop}
+        if Shop.objects.filter(owner=profile).exists():
+            shop = get_object_or_404(Shop, owner=profile)
+
+            return {"shop": shop}
+        else:    
+            return {}
 
     return {}
 

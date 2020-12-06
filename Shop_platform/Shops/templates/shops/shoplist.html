@@ -53,7 +53,7 @@
 	<div class="resume-order">
 		<p>Total: <span id="TotalCost" value="{{total_cost}}">{{total_cost}}</span> euros </p>
 
-		{% if profile.user != request.user %}
+		{% if profile.user == request.user %}
 		<input type="hidden" value="order" name="panier" id="panier">
 		<input type="submit" value="Create an Order" class="le_btn" onclick="changeValue()">
 		</form>

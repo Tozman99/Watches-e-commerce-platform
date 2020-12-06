@@ -37,8 +37,8 @@
                                 <button class="dropbtn"><img src="{{ profile.image.url }}" class="profile-image-minia"></button>
                                 <div class="dropdown-content">
                                     <a href="{% url 'users:profile' %}">Profile</a>
-                                    {% if shop %}
-                                    <a href="{% url 'shops:detail-shop' shop.slug %}">Your Shop</a>
+                                    {% if shop != None %}
+                                        <a href="{% url 'shops:detail-shop' shop.slug %}">Your Shop</a>
                                     {% endif%}
                                     <a href="{% url 'orders:order_list' %}">Your orders</a>
                                     <a href="{% url 'users:logout' %}">Logout</a>

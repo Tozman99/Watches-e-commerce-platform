@@ -13,7 +13,7 @@
 	<h2>
 		Create your own shop
 	</h2>
-	
+	{% if profile.user == request.user and shop.owner != profile %}
 	<form method="POST" class="form-creation">
 		{% csrf_token %}
 		<div class="fieldWrapper">
@@ -23,9 +23,14 @@
 			<div class="form_field">{{ form.name }}</div>
 			<input type="submit" name="create your shop" value="create your shop" class="le_btn">
 	</form>
-
+	{% else %}
+	<div class="text"> You've already have a shop </div>
+{% endif %}
 </body>
 <style>
+	.text{
+		text-align: center;
+	}
 	form{
 		margin-top: 100px;
 		text-align: center;

@@ -32,7 +32,7 @@ def create_shop_view(request):
 
 			return redirect(reverse("shops:detail-shop", kwargs={"shop_slug": shop_slug}))
 
-	return render(request, "shops/create_shop.html", {"form":form})
+	return render(request, "shops/create_shop.html", {"form":form, "profile": owner})
 
 def detail_shop_view(request, shop_slug):
 
@@ -156,7 +156,7 @@ def shop_list_view(request):
 			order.save()
 			cart.clear_shopping(products)
 			order_creation.send(sender=Order, user=customer, order=order)
-		print(request.session["shopping_cart"])
+	print(request.session["shopping_cart"], request.user, customer.user)
 
 	total_prices = cart.get_total_price()
 		

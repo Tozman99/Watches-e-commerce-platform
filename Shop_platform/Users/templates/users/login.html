@@ -21,7 +21,7 @@
 							<div class="fieldWrapper group">
 								{{ form.username.errors }}
 								<div class="form_field">
-									<div><small><label for="{{ form.name.id_for_label }}" class="label"> Username </label></small></div>
+									<div><small><label for="{{ form.name.id_for_label }}" class="label label-username"> Username </label></small></div>
 									{{ form.username }}
 								</div>
 							</div>
@@ -29,7 +29,7 @@
 								{{ form.password.errors }}
 								<div class="form_field">
 									<div>
-										<small><label for="{{ form.name.id_for_label }}" class="label"> Password  </label></small>
+										<small><label for="{{ form.name.id_for_label }}" class="label label-password"> Password  </label></small>
 									</div>
 									{{ form.password }}
 								</div>
@@ -71,10 +71,11 @@
 	#id_username, #id_password{
 		border-width:0px;
 		border:none;
-		background-color: black;
 		border-bottom: 2px solid #696969;
+		background-color: #D3D3D3;
 		width: 350px;
 		margin-left: -50px;
+		outline: none !important;
 
 	}
 	input:-webkit-autofill,
@@ -88,6 +89,8 @@ input:-webkit-autofill:active  {
 
 
 }
+
+
 .form_field{
 	background-color: #D3D3D3;
 	padding-left: 50px;
